@@ -49,6 +49,11 @@ gap:16px;
 
 .sign-right{text-align:right}
 
+.company-line{
+white-space:nowrap;
+font-weight:bold;
+}
+
 .stamp{height:40px}
 
 @media print{
