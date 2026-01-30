@@ -1,10 +1,102 @@
+body{
+  font-family: Arial, sans-serif;
+  background:#f4f6f9;
+  margin:0;
+}
 
-body{font-family:Arial;padding:10px}
-.container{max-width:850px;margin:auto}
-.logo{display:block;margin:auto;height:45px}
-.login-box{width:300px;margin:80px auto;text-align:center;border:1px solid #000;padding:20px}
-.login-box input{width:90%;padding:6px;margin:5px}
-table{width:100%;border-collapse:collapse;margin-top:10px}
-th,td{border:1px solid #000;padding:4px}
-textarea,select{width:100%;padding:5px}
-button{padding:6px;margin-top:6px}
+.center{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:100vh;
+}
+
+.topbar{
+  display:flex;
+  align-items:center;
+  gap:15px;
+  background:#1f2b5a;
+  color:white;
+  padding:12px 25px;
+}
+
+.login-box{
+  background:white;
+  padding:30px;
+  width:320px;
+  text-align:center;
+  border-radius:8px;
+  box-shadow:0 0 10px #ccc;
+}
+
+input{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+}
+
+button{
+  padding:10px 20px;
+  background:#3f51ff;
+  color:white;
+  border:none;
+  cursor:pointer;
+}
+
+.btn{
+  display:inline-block;
+  padding:12px 20px;
+  background:#3f51ff;
+  color:white;
+  text-decoration:none;
+  margin:10px;
+}
+
+.red{background:#e53935;}
+
+.logo{
+  max-width:140px;
+  height:auto;
+  margin-bottom:15px;
+}
+
+.logo-small{
+  max-width:80px;
+  height:auto;
+}
+
+.logo-print{
+  max-width:120px;
+  height:auto;
+}
+
+.container{
+  padding:40px;
+  text-align:center;
+}
+
+.form-container{
+  width:500px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  margin-top:30px;
+  border-radius:8px;
+}
+
+.print-header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.stamp{
+  width:120px;
+  float:right;
+  margin-top:40px;
+}
+
+@media print{
+  button{display:none;}
+  body{background:white;}
+}

@@ -1,112 +1,40 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<link rel="stylesheet" href="print.css">
+  <title>Create PO</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<script>
-if(!localStorage.getItem("logged")){
- location.href="login.html";
-}
-</script>
+<header class="topbar">
+  <img src="assets/logo.png" class="logo-small">
+  <h3>Create Purchase Order</h3>
+</header>
 
-<div class="page">
+<div class="form-container">
+<form>
 
-<img src="assets/logo.png" class="logo-print">
+<h3>Vendor Details</h3>
+<input id="vendor" placeholder="Vendor Name" required>
+<input id="gst" placeholder="GST Number">
 
-<h2>PURCHASE ORDER</h2>
+<h3>PO Details</h3>
+<input id="poNumber" placeholder="PO Number">
+<input type="date" id="poDate">
 
-<div class="head-row">
-<div><b>PO No:</b> <span id="pno"></span></div>
-<div><b>Date:</b> <span id="pdt"></span></div>
+<h3>Item</h3>
+<input id="item" placeholder="Item Description">
+<input type="number" id="qty" placeholder="Quantity">
+<input type="number" id="rate" placeholder="Rate">
+
+<h3>Total</h3>
+<input type="number" id="total" placeholder="Total Amount">
+
+<button type="button" onclick="generatePO()">Preview</button>
+
+</form>
 </div>
 
-<div class="two-col">
-
-<div>
-<b>Consignee</b><br>
-Indexnine Technologies Pvt. Ltd.<br>
-12th Floor, Sadanand Business Center<br>
-Pashan Highwayy Side Rd<br>
-PUNE - 411007<br>
-Maharashtra, INDIA<br>
-GSTIN/UIN:27AADCI7588M1ZR<br>
-State Name : Maharashtra, Code : 27
-</div>
-
-<div>
-<b>Supplier</b><br>
-<span id="sup"></span>
-</div>
-
-</div>
-
-<table id="ptbl">
-<tr><th>#</th><th>Item</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th></tr>
-</table>
-
-<div class="bottom">
-
-<div><b>Terms</b><br><span id="trm"></span></div>
-
-<div class="sign">
-For Indexnine Technologies Pvt. Ltd.<br><br>
-<img src="assets/stamp.png" class="stamp"><br>
-<b>Authorised Signatory</b>
-</div>
-
-</div>
-
-<button onclick="window.print()" class="print-btn">Print / Save PDF</button>
-
-<script>
-
-const d=JSON.parse(localStorage.getItem("poData"));
-
-pno.innerText=d.poNo;
-pdt.innerText=d.date;
-sup.innerText=d.supplier;
-trm.innerText=d.terms;
-
-let sub=0;
-
-d.items.forEach((it,i)=>{
- const amt=Math.round(it.qty*it.rate);
- sub+=amt;
-
- ptbl.innerHTML+=`
- <tr>
- <td>${i+1}</td>
- <td>${it.name}</td>
- <td>${it.qty}</td>
- <td class="r">₹ ${it.rate.toLocaleString("en-IN")}</td>
- <td class="r">₹ ${amt.toLocaleString("en-IN")}</td>
- </tr>`;
-});
-
-let tax=Math.round(sub*0.18);
-let rows="";
-
-if(d.taxType==="cgst"){
- let h=Math.round(tax/2);
- rows+=`<tr><td colspan=4>CGST (9%)</td><td class="r">₹ ${h.toLocaleString("en-IN")}</td></tr>`;
- rows+=`<tr><td colspan=4>SGST (9%)</td><td class="r">₹ ${h.toLocaleString("en-IN")}</td></tr>`;
-}
-
-if(d.taxType==="igst"){
- rows+=`<tr><td colspan=4>IGST (18%)</td><td class="r">₹ ${tax.toLocaleString("en-IN")}</td></tr>`;
-}
-
-ptbl.innerHTML+=`
-<tr><td colspan=4>Sub Total</td><td class="r">₹ ${sub.toLocaleString("en-IN")}</td></tr>
-${rows}
-<tr><td colspan=4><b>Total</b></td><td class="r"><b>₹ ${(sub+tax).toLocaleString("en-IN")}</b></td></tr>
-`;
-
-</script>
-
-</div>
+<script src="script.js"></script>
 </body>
 </html>

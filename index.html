@@ -1,52 +1,17 @@
-
 <!DOCTYPE html>
 <html>
 <head>
-<title>PO Portal</title>
-<link rel="stylesheet" href="style.css">
+  <title>Login | Indexnine PO</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body>
-
-<script>
-if(!localStorage.getItem("logged")){
- location.href="login.html";
-}
-</script>
-
-<div class="container">
-<img src="assets/logo.png" class="logo">
-
-<h2>Purchase Order Portal</h2>
-
-<label>Supplier</label>
-<textarea id="supplier"></textarea>
-
-<label>Terms</label>
-<textarea id="terms"></textarea>
-
-<label>Tax Type</label>
-<select id="taxType">
-<option value="cgst">CGST + SGST</option>
-<option value="igst">IGST</option>
-</select>
-
-<table id="tbl">
-<tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th></th></tr>
-</table>
-
-<button onclick="addRow()">+ Add Item</button><br><br>
-<button onclick="generate()">Generate PO</button>
-<button onclick="logout()">Logout</button>
-</div>
-
+<body class="center">
+  <div class="login-box">
+    <img src="assets/logo.png" class="logo">
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Username">
+    <input type="password" id="password" placeholder="Password">
+    <button onclick="login()">Login</button>
+  </div>
 <script src="script.js"></script>
-
-<script>
-function logout(){
- localStorage.removeItem("logged");
- location.href="login.html";
-}
-</script>
-
 </body>
 </html>

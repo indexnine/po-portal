@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Print PO</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="printArea">
+
+<div class="print-header">
+  <img src="assets/logo.png" class="logo-print">
+  <h2>Purchase Order</h2>
+</div>
+
+<p><b>Vendor:</b> <span id="pVendor"></span></p>
+<p><b>PO No:</b> <span id="pPo"></span></p>
+<p><b>Date:</b> <span id="pDate"></span></p>
+
+<hr>
+
+<p><b>Item:</b> <span id="pItem"></span></p>
+<p><b>Qty:</b> <span id="pQty"></span></p>
+<p><b>Rate:</b> <span id="pRate"></span></p>
+<p><b>Total:</b> ₹<span id="pTotal"></span></p>
+
+<img src="assets/stamp.png" class="stamp">
+
+</div>
+
+<button onclick="window.print()">Print / Save PDF</button>
+
+<script src="script.js"></script>
+</body>
+</html>
