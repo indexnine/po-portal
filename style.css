@@ -1,61 +1,6 @@
-body{
-font-family:Arial,Helvetica,sans-serif;
-background:#f5f5f5;
-}
 
-.header{
-text-align:center;
-margin:20px;
-}
-
-.logo{height:35px}
-
-form{
-max-width:900px;
-margin:auto;
-background:white;
-padding:20px;
-border:1px solid #ccc;
-}
-
-.grid2{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:20px;
-}
-
-label{font-weight:bold;margin-top:10px;display:block}
-
-input,textarea,select{
-width:100%;
-padding:6px;
-margin-top:5px;
-}
-
-table{
-width:100%;
-border-collapse:collapse;
-margin-top:10px;
-}
-
-th,td{
-border:1px solid #000;
-padding:6px;
-}
-
-th{background:#eee}
-
-button{
-margin-top:12px;
-padding:8px 14px;
-}
-
-.btn-main{
-background:#111;
-color:white;
-border:none;
-}
-
-.tax-box{margin-top:10px}
-
-.live{margin-top:15px;font-size:15px}
+body{font-family:Arial;padding:20px}
+table{border-collapse:collapse;width:100%}
+th,td{border:1px solid #000;padding:5px}
+textarea{width:100%}
+button{padding:8px;margin:5px}

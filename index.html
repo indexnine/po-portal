@@ -6,61 +6,31 @@
 </head>
 <body>
 
-<div class="header">
-  <img src="assets/logo.png" class="logo">
-  <h2>Purchase Order Portal</h2>
-</div>
+<h2>Purchase Order Portal</h2>
 
-<form id="poForm">
-
-<div class="grid2">
-  <div>
-    <label>PO Number</label>
-    <input id="poNo" readonly>
-  </div>
-  <div>
-    <label>Date</label>
-    <input id="poDate" readonly>
-  </div>
-</div>
+<div class="form">
 
 <label>Supplier</label>
-<textarea id="supplier" required></textarea>
+<textarea id="supplier"></textarea>
 
-<label>Terms & Conditions</label>
+<label>Terms</label>
 <textarea id="terms"></textarea>
 
-<h3>Items</h3>
+<label>Tax Type</label>
+<select id="taxType">
+<option value="cgst">CGST + SGST (9%+9%)</option>
+<option value="igst">IGST (18%)</option>
+</select>
 
-<table id="itemsTable">
-<thead>
-<tr>
-<th>#</th><th>Particulars</th><th>Qty</th><th>Rate (₹)</th>
-</tr>
-</thead>
-<tbody id="itemsBody"></tbody>
+<table id="tbl">
+<tr><th>#</th><th>Name</th><th>Qty</th><th>Rate</th><th></th></tr>
 </table>
 
-<button type="button" onclick="addRow()">+ Add Item</button>
+<button onclick="addRow()">+ Add Item</button><br><br>
 
-<div class="tax-box">
-  <label>Tax Type</label>
-  <select id="taxType">
-    <option value="cgst">CGST 9% + SGST 9%</option>
-    <option value="igst">IGST 18%</option>
-  </select>
+<button onclick="gen()">Generate PO</button>
+
 </div>
-
-<button type="submit" class="btn-main">Generate Purchase Order</button>
-
-<div class="live">
-<p>Sub Total: ₹ <span id="liveSub">0</span></p>
-<p>Tax: ₹ <span id="liveTax">0</span></p>
-<p><b>Total: ₹ <span id="liveTotal">0</span></b></p>
-<p>Amount in Words:<br><span id="liveWords"></span></p>
-</div>
-
-</form>
 
 <script src="script.js"></script>
 </body>
