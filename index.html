@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,9 +7,16 @@
 </head>
 <body>
 
-<h2>Purchase Order Portal</h2>
+<script>
+if(!localStorage.getItem("logged")){
+ location.href="login.html";
+}
+</script>
 
-<div class="form">
+<div class="container">
+<img src="assets/logo.png" class="logo">
+
+<h2>Purchase Order Portal</h2>
 
 <label>Supplier</label>
 <textarea id="supplier"></textarea>
@@ -18,20 +26,27 @@
 
 <label>Tax Type</label>
 <select id="taxType">
-<option value="cgst">CGST + SGST (9%+9%)</option>
-<option value="igst">IGST (18%)</option>
+<option value="cgst">CGST + SGST</option>
+<option value="igst">IGST</option>
 </select>
 
 <table id="tbl">
-<tr><th>#</th><th>Name</th><th>Qty</th><th>Rate</th><th></th></tr>
+<tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th></th></tr>
 </table>
 
 <button onclick="addRow()">+ Add Item</button><br><br>
-
-<button onclick="gen()">Generate PO</button>
-
+<button onclick="generate()">Generate PO</button>
+<button onclick="logout()">Logout</button>
 </div>
 
 <script src="script.js"></script>
+
+<script>
+function logout(){
+ localStorage.removeItem("logged");
+ location.href="login.html";
+}
+</script>
+
 </body>
 </html>

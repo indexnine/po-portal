@@ -1,30 +1,32 @@
+
 <!DOCTYPE html>
 <html>
 <head>
-  <title>PO Portal Login</title>
-  <link rel="stylesheet" href="style.css">
+<title>Login</title>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-<div class="header">
-  <img src="assets/logo.png" class="logo">
-</div>
-
 <div class="login-box">
-  <h2>PO Portal Login</h2>
-  <input id="username" placeholder="Username">
-  <input id="password" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-</div>
+<img src="assets/logo.png" class="logo">
+<h3>PO Portal Login</h3>
+
+<input id="u" placeholder="Username">
+<input id="p" type="password" placeholder="Password">
+
+<button onclick="login()">Login</button>
+<p id="err"></p>
 
 <script>
 function login(){
-  if(username.value && password.value){
-    sessionStorage.setItem("loggedIn","yes");
-    location.href="index.html";
-  } else alert("Enter credentials");
+ if(u.value==="admin" && p.value==="admin123"){
+  localStorage.setItem("logged","1");
+  location.href="index.html";
+ }else{
+  err.innerText="Invalid Credentials";
+ }
 }
 </script>
-
+</div>
 </body>
 </html>

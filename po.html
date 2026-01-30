@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -5,76 +6,105 @@
 </head>
 <body>
 
-<div class="wrap">
+<script>
+if(!localStorage.getItem("logged")){
+ location.href="login.html";
+}
+</script>
+
+<div class="page">
+
+<img src="assets/logo.png" class="logo-print">
 
 <h2>PURCHASE ORDER</h2>
 
-<div><b>PO:</b> <span id="pno"></span> |
-<b>Date:</b> <span id="pdt"></span></div>
+<div class="head-row">
+<div><b>PO No:</b> <span id="pno"></span></div>
+<div><b>Date:</b> <span id="pdt"></span></div>
+</div>
 
-<div class="grid">
-<div><b>Consignee</b><br>Indexnine Technologies Pvt. Ltd.</div>
-<div><b>Supplier</b><br><span id="sup"></span></div>
+<div class="two-col">
+
+<div>
+<b>Consignee</b><br>
+Indexnine Technologies Pvt. Ltd.<br>
+12th Floor, Sadanand Business Center<br>
+Pashan Highwayy Side Rd<br>
+PUNE - 411007<br>
+Maharashtra, INDIA<br>
+GSTIN/UIN:27AADCI7588M1ZR<br>
+State Name : Maharashtra, Code : 27
+</div>
+
+<div>
+<b>Supplier</b><br>
+<span id="sup"></span>
+</div>
+
 </div>
 
 <table id="ptbl">
-<tr><th>#</th><th>Item</th><th>Qty</th><th>Rate</th><th>Amount</th></tr>
+<tr><th>#</th><th>Item</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th></tr>
 </table>
 
 <div class="bottom">
-<div>
-<b>Terms</b><br><span id="trm"></span>
+
+<div><b>Terms</b><br><span id="trm"></span></div>
+
+<div class="sign">
+For Indexnine Technologies Pvt. Ltd.<br><br>
+<img src="assets/stamp.png" class="stamp"><br>
+<b>Authorised Signatory</b>
 </div>
 
-<div>
-For Indexnine Technologies Pvt. Ltd.<br><br>
-Authorised Signatory
-</div>
 </div>
 
 <button onclick="window.print()" class="print-btn">Print / Save PDF</button>
 
 <script>
+
 const d=JSON.parse(localStorage.getItem("poData"));
 
 pno.innerText=d.poNo;
-pdt.innerText=d.poDate;
+pdt.innerText=d.date;
 sup.innerText=d.supplier;
 trm.innerText=d.terms;
 
 let sub=0;
 
 d.items.forEach((it,i)=>{
- let amt=Math.round(it.q*it.r);
+ const amt=Math.round(it.qty*it.rate);
  sub+=amt;
 
  ptbl.innerHTML+=`
  <tr>
  <td>${i+1}</td>
- <td>${it.n}</td>
- <td>${it.q}</td>
- <td>₹ ${it.r.toLocaleString("en-IN")}</td>
- <td>₹ ${amt.toLocaleString("en-IN")}</td>
+ <td>${it.name}</td>
+ <td>${it.qty}</td>
+ <td class="r">₹ ${it.rate.toLocaleString("en-IN")}</td>
+ <td class="r">₹ ${amt.toLocaleString("en-IN")}</td>
  </tr>`;
 });
 
 let tax=Math.round(sub*0.18);
-let html="";
+let rows="";
 
 if(d.taxType==="cgst"){
  let h=Math.round(tax/2);
- html+=`<tr><td colspan=4>CGST (9%)</td><td>₹ ${h.toLocaleString("en-IN")}</td></tr>`;
- html+=`<tr><td colspan=4>SGST (9%)</td><td>₹ ${h.toLocaleString("en-IN")}</td></tr>`;
+ rows+=`<tr><td colspan=4>CGST (9%)</td><td class="r">₹ ${h.toLocaleString("en-IN")}</td></tr>`;
+ rows+=`<tr><td colspan=4>SGST (9%)</td><td class="r">₹ ${h.toLocaleString("en-IN")}</td></tr>`;
 }
 
 if(d.taxType==="igst"){
- html+=`<tr><td colspan=4>IGST (18%)</td><td>₹ ${tax.toLocaleString("en-IN")}</td></tr>`;
+ rows+=`<tr><td colspan=4>IGST (18%)</td><td class="r">₹ ${tax.toLocaleString("en-IN")}</td></tr>`;
 }
 
 ptbl.innerHTML+=`
-<tr><td colspan=4>Sub Total</td><td>₹ ${sub.toLocaleString("en-IN")}</td></tr>
-${html}
-<tr><td colspan=4><b>Total</b></td><td><b>₹ ${(sub+tax).toLocaleString("en-IN")}</b></td></tr>`;
+<tr><td colspan=4>Sub Total</td><td class="r">₹ ${sub.toLocaleString("en-IN")}</td></tr>
+${rows}
+<tr><td colspan=4><b>Total</b></td><td class="r"><b>₹ ${(sub+tax).toLocaleString("en-IN")}</b></td></tr>
+`;
+
 </script>
 
 </div>

@@ -1,42 +1,41 @@
 
-let c=1;
-
+let count=1;
 addRow();
 
 function addRow(){
- let r=document.createElement("tr");
- r.innerHTML=`<td>${c}</td>
+ const r=document.createElement("tr");
+ r.innerHTML=`<td>${count}</td>
  <td><input></td>
  <td><input type=number></td>
  <td><input type=number step=0.01></td>
- <td><button onclick="this.parentNode.parentNode.remove()">X</button></td>`;
+ <td><button onclick="this.closest('tr').remove()">X</button></td>`;
  tbl.appendChild(r);
- c++;
+ count++;
 }
 
-function gen(){
+function generate(){
 
- let items=[];
+ const items=[];
+
  document.querySelectorAll("#tbl tr").forEach((r,i)=>{
-  if(i==0)return;
-  let t=r.querySelectorAll("input");
+  if(i===0)return;
+  const t=r.querySelectorAll("input");
   if(!t.length)return;
 
   items.push({
-   n:t[0].value,
-   q:Number(t[1].value),
-   r:Number(t[2].value)
+   name:t[0].value,
+   qty:Number(t[1].value),
+   rate:Number(t[2].value)
   });
  });
 
- let d={
-  poNo:"PO-"+new Date().getFullYear()+"-"+Math.floor(Math.random()*999),
-  poDate:new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"2-digit"}),
+ const d={
+  poNo:"PO-"+new Date().getFullYear()+"-"+Math.floor(Math.random()*900+100),
+  date:new Date().toLocaleDateString("en-GB",{day:"2-digit",month:"short",year:"2-digit"}),
   supplier:supplier.value,
   terms:terms.value,
   taxType:taxType.value,
-  items:items,
-  words:"",
+  items:items
  };
 
  localStorage.setItem("poData",JSON.stringify(d));
