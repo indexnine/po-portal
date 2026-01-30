@@ -1,68 +1,54 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="UTF-8">
-  <title>Purchase Order</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="print.css">
+<title>PO</title>
+<link rel="stylesheet" href="print.css">
 </head>
 <body>
 
 <div class="po-wrapper">
 
-<div class="center">
-  <img src="assets/logo.png" class="logo-print">
-  <h2>PURCHASE ORDER</h2>
-</div>
+<img src="assets/logo.png" class="logo-print">
+
+<h2>PURCHASE ORDER</h2>
 
 <div class="header-grid">
-  <div><strong>PO No:</strong><br><span id="poNo"></span></div>
-  <div><strong>Date:</strong><br><span id="poDate"></span></div>
+<div>
+<b>PO No:</b> <span id="pno"></span>
+</div>
+<div>
+<b>Date:</b> <span id="pdt"></span>
+</div>
 </div>
 
 <div class="two-col">
-  <div>
-    <strong>Consignee (Bill To / Ship To)</strong><br>
-    <strong>Indexnine Technologies Private Limited</strong><br>
-    12th Floor, Sadanand Business Center<br>
-    Pashan Highwayy Side Rd<br>
-    PUNE - 411007<br>
-    Maharashtra, INDIA<br>
-    GSTIN/UIN:27AADCI7588M1ZR<br>
-    State Name : Maharashtra, Code : 27
-  </div>
-  <div>
-    <strong>Supplier</strong><br>
-    <span id="supplier"></span>
-  </div>
+<div>
+<b>Consignee</b><br>
+Indexnine Technologies Pvt. Ltd.
+</div>
+<div>
+<b>Supplier</b><br>
+<span id="sup"></span>
+</div>
 </div>
 
-<table class="items">
-<thead>
+<table class="items" id="ptbl">
 <tr>
-<th>#</th><th>Particulars</th><th>Qty</th><th class="money">Rate (₹)</th><th class="money">Amount (₹)</th>
+<th>#</th><th>Particulars</th><th>Qty</th><th>Rate (₹)</th><th>Amount (₹)</th>
 </tr>
-</thead>
-<tbody id="itemsBody"></tbody>
-<tr><td colspan="3"></td><td>Sub Total</td><td class="money">₹ <span id="subTotal"></span></td></tr>
-<tr><td colspan="3"></td><td>CGST (9%)</td><td class="money">₹ <span id="cgstAmt"></span></td></tr>
-<tr><td colspan="3"></td><td>SGST (9%)</td><td class="money">₹ <span id="sgstAmt"></span></td></tr>
-<tr class="grand"><td colspan="3"></td><td>Total</td><td class="money">₹ <span id="grandTotal"></span></td></tr>
 </table>
 
 <div class="bottom-grid">
-  <div>
-    <strong>Amount in Words:</strong><br>
-    <span id="words"></span><br><br>
-    <strong>Terms & Conditions</strong><br>
-    <span id="termsText"></span>
-  </div>
+<div>
+<b>Amount in Words:</b><br><span id="wrd"></span><br><br>
+<b>Terms & Conditions</b><br><span id="trm"></span>
+</div>
 
-  <div class="sign-right">
-    for Indexnine Technologies Private Limited<br>
-    <img src="assets/stamp.png" class="stamp"><br>
-    <strong>Authorised Signatory</strong>
-  </div>
+<div class="sign-right">
+For Indexnine Technologies Pvt. Ltd.<br><br>
+<img src="assets/stamp.png" class="stamp"><br>
+<b>Authorised Signatory</b>
+</div>
 </div>
 
 <button onclick="window.print()" class="print-btn">Print / Save PDF</button>
@@ -70,32 +56,37 @@
 </div>
 
 <script>
-const d = JSON.parse(localStorage.getItem("poData")||"{}");
-if(d.poNo){
-  poNo.innerText=d.poNo;
-  poDate.innerText=d.poDate;
-  supplier.innerText=d.supplier;
-  termsText.innerText=d.terms||"—";
-  words.innerText=d.totalWords;
-  let sub=0;
-  d.items.forEach((i,idx)=>{
-    const amt=i.qty*i.rate;
-    sub+=amt;
-    itemsBody.innerHTML+=`
-      <tr>
-        <td>${idx+1}</td>
-        <td>${i.name}</td>
-        <td style="text-align:right">${i.qty}</td>
-        <td class="money">₹ ${i.rate}</td>
-        <td class="money">₹ ${amt.toFixed(2)}</td>
-      </tr>`;
-  });
-  const cgst=sub*0.09, sgst=sub*0.09;
-  subTotal.innerText=sub.toFixed(2);
-  cgstAmt.innerText=cgst.toFixed(2);
-  sgstAmt.innerText=sgst.toFixed(2);
-  grandTotal.innerText=(sub+cgst+sgst).toFixed(2);
-}
+const d=JSON.parse(localStorage.getItem("poData"));
+pno.innerText=d.poNo;
+pdt.innerText=d.poDate;
+sup.innerText=d.supplier;
+wrd.innerText=d.words;
+trm.innerText=d.terms;
+
+let sub=0;
+
+d.items.forEach((it,i)=>{
+const amt=Math.round(it.q*it.r);
+sub+=amt;
+
+ptbl.innerHTML+=`
+<tr>
+<td>${i+1}</td>
+<td>${it.n}</td>
+<td>${it.q}</td>
+<td class="money">₹ ${Number(it.r).toLocaleString("en-IN")}</td>
+<td class="money">₹ ${amt.toLocaleString("en-IN")}</td>
+</tr>`;
+});
+
+const tax=Math.round(sub*0.18);
+const tot=sub+tax;
+
+ptbl.innerHTML+=`
+<tr><td colspan="4">Sub Total</td><td class="money">₹ ${sub.toLocaleString("en-IN")}</td></tr>
+<tr><td colspan="4">Tax</td><td class="money">₹ ${tax.toLocaleString("en-IN")}</td></tr>
+<tr><td colspan="4"><b>Total</b></td><td class="money"><b>₹ ${tot.toLocaleString("en-IN")}</b></td></tr>
+`;
 </script>
 
 </body>

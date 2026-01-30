@@ -1,67 +1,67 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-  <title>Purchase Order Portal</title>
-  <link rel="stylesheet" href="style.css">
+<title>PO Portal</title>
+<link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-  <div class="header">
-    <img src="assets/logo.png" class="logo">
-    <h1>Purchase Order Portal</h1>
+<div class="header">
+  <img src="assets/logo.png" class="logo">
+  <h2>Purchase Order Portal</h2>
+</div>
+
+<form id="poForm">
+
+<div class="grid2">
+  <div>
+    <label>PO Number</label>
+    <input id="poNo" readonly>
   </div>
-
-  <div class="container">
-    <form id="poForm">
-
-      <label>PO Number</label>
-      <input id="poNo" readonly>
-
-      <label>PO Date</label>
-      <input id="poDate" readonly>
-
-      <label>Supplier (Name & Address)</label>
-      <textarea id="supplier" required></textarea>
-
-      <label>Terms & Conditions</label>
-      <textarea id="terms"></textarea>
-
-      <h3>Items</h3>
-      <table id="itemsTable">
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Particulars</th>
-            <th>Qty</th>
-            <th>Rate (₹)</th>
-          </tr>
-        </thead>
-        <tbody id="itemsBody"></tbody>
-      </table>
-
-      <div class="add-item-row">
-        <button type="button" onclick="addRow()">+ Add Item</button>
-      </div>
-
-      <label>CGST %</label>
-      <input id="cgst" value="9">
-
-      <label>SGST %</label>
-      <input id="sgst" value="9">
-
-      <button type="submit">Generate Purchase Order</button>
-
-      <p><strong>Sub Total:</strong> ₹ <span id="liveSub">0.00</span></p>
-      <p><strong>Tax:</strong> ₹ <span id="liveTax">0.00</span></p>
-      <p><strong>Total:</strong> ₹ <span id="liveTotal">0.00</span></p>
-      <p><strong>Amount in Words:</strong><br><span id="liveWords">Rupees Zero Only</span></p>
-
-    </form>
+  <div>
+    <label>Date</label>
+    <input id="poDate" readonly>
   </div>
+</div>
 
-  <script src="script.js"></script>
+<label>Supplier</label>
+<textarea id="supplier" required></textarea>
+
+<label>Terms & Conditions</label>
+<textarea id="terms"></textarea>
+
+<h3>Items</h3>
+
+<table id="itemsTable">
+<thead>
+<tr>
+<th>#</th><th>Particulars</th><th>Qty</th><th>Rate (₹)</th>
+</tr>
+</thead>
+<tbody id="itemsBody"></tbody>
+</table>
+
+<button type="button" onclick="addRow()">+ Add Item</button>
+
+<div class="tax-box">
+  <label>Tax Type</label>
+  <select id="taxType">
+    <option value="cgst">CGST 9% + SGST 9%</option>
+    <option value="igst">IGST 18%</option>
+  </select>
+</div>
+
+<button type="submit" class="btn-main">Generate Purchase Order</button>
+
+<div class="live">
+<p>Sub Total: ₹ <span id="liveSub">0</span></p>
+<p>Tax: ₹ <span id="liveTax">0</span></p>
+<p><b>Total: ₹ <span id="liveTotal">0</span></b></p>
+<p>Amount in Words:<br><span id="liveWords"></span></p>
+</div>
+
+</form>
+
+<script src="script.js"></script>
 </body>
-
 </html>
