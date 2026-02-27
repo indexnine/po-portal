@@ -12,15 +12,18 @@
     <style>
         /* CSS STYLES */
         :root {
-            --primary-color: #2c3e50;
-            --accent-color: #3498db;
-            --text-color: #333;
+            --primary-color: #0f172a;
+            --accent-color: #3b82f6;
+            --accent-hover: #2563eb;
+            --text-color: #334155;
             --light-bg: #f8fafc;
             --white: #ffffff;
             --border-color: #e2e8f0;
-            --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
             --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --radius-md: 0.5rem;
+            --radius-lg: 1rem;
         }
 
         body {
@@ -29,7 +32,7 @@
             color: var(--text-color);
             margin: 0;
             padding: 0;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         /* Login Overlay */
@@ -39,7 +42,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            background: linear-gradient(135deg, rgba(30,41,59,0.95) 0%, rgba(15,23,42,0.98) 100%);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -47,32 +51,25 @@
         }
 
         .login-box {
-            background: var(--white);
+            background: rgba(255, 255, 255, 0.95);
             padding: 3rem;
-            border-radius: 1rem;
-            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
             text-align: center;
             width: 100%;
             max-width: 400px;
             animation: slideUp 0.5s ease-out;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
         @keyframes slideUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .login-logo {
-            max-height: 40px;
-            /* Tiny logo as requested */
-            margin-bottom: 20px;
+            max-height: 48px;
+            margin-bottom: 24px;
             object-fit: contain;
         }
 
@@ -81,6 +78,7 @@
             color: var(--primary-color);
             font-weight: 700;
             font-size: 1.5rem;
+            letter-spacing: -0.025em;
         }
 
         .login-box input {
@@ -88,38 +86,37 @@
             padding: 0.875rem 1rem;
             margin: 0.5rem 0;
             border: 1px solid var(--border-color);
-            border-radius: 0.5rem;
+            border-radius: var(--radius-md);
             box-sizing: border-box;
             font-size: 1rem;
-            transition: border-color 0.2s, box-shadow 0.2s;
+            transition: all 0.2s;
+            font-family: inherit;
         }
 
         .login-box input:focus {
             outline: none;
             border-color: var(--accent-color);
-            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
         .login-box button {
             width: 100%;
             padding: 0.875rem;
-            background: linear-gradient(to right, #2c3e50, #3498db);
+            background: var(--accent-color);
             color: white;
             border: none;
-            border-radius: 0.5rem;
+            border-radius: var(--radius-md);
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
             margin-top: 1.5rem;
-            transition: transform 0.1s, opacity 0.2s;
+            transition: all 0.2s;
+            box-shadow: var(--shadow-md);
         }
 
         .login-box button:hover {
-            opacity: 0.9;
-        }
-
-        .login-box button:active {
-            transform: scale(0.98);
+            background: var(--accent-hover);
+            transform: translateY(-1px);
         }
 
         #portal-content {
@@ -133,68 +130,57 @@
             width: 210mm;
             min-height: 297mm;
             margin: 0 auto;
-            padding: 60px;
-            box-shadow: var(--shadow-lg);
+            padding: 50px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
             position: relative;
             box-sizing: border-box;
-            border: 3px double var(--primary-color);
-            /* Professional Border */
+            border-top: 8px solid var(--accent-color);
+            border-radius: var(--radius-lg);
         }
 
         .header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            /* Aligns content to bottom (line) */
             margin-bottom: 40px;
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 5px;
-            /* Minimal space above line */
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 15px;
         }
 
-        .header-left {
+        .header-left, .header-right {
             flex: 1;
-            text-align: left;
+        }
+
+        .header-right {
+            text-align: right;
         }
 
         .header-center {
-            flex: 1;
+            flex: 2;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-end;
-        }
-
-        .header-right {
-            flex: 1;
-            text-align: right;
         }
 
         .header-center img {
-            max-height: 40px;
-            /* Tiny logo as requested */
-            display: block;
-            margin-bottom: 5px;
-            /* Reduced margin */
+            max-height: 50px;
+            margin-bottom: 10px;
         }
 
         .po-title {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 800;
             color: var(--primary-color);
-            letter-spacing: 1px;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            line-height: 1;
-            /* Tight line height */
         }
 
         .meta-text {
             font-size: 0.95rem;
             color: #64748b;
             margin: 0;
-            /* Remove margin to sit flush */
-            line-height: 1.2;
+            line-height: 1.4;
         }
 
         .meta-text strong {
@@ -205,87 +191,59 @@
             display: flex;
             justify-content: space-between;
             gap: 40px;
-            margin-top: 40px;
+            margin-top: 30px;
             margin-bottom: 40px;
         }
 
-        .consignee,
-        .supplier {
+        .consignee, .supplier {
             flex: 1;
             font-size: 0.95rem;
             line-height: 1.6;
             background: #f8fafc;
-            padding: 20px;
-            border-radius: 8px;
+            padding: 24px;
+            border-radius: var(--radius-md);
             border: 1px solid var(--border-color);
         }
 
-        .consignee strong,
-        .supplier strong {
+        .consignee strong, .supplier strong {
             display: block;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
             color: var(--primary-color);
             font-size: 1.1rem;
-            border-bottom: 1px solid #e2e8f0;
-            padding-bottom: 5px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 8px;
         }
 
-        textarea {
-            width: 100%;
-            height: 100px;
-            box-sizing: border-box;
-            /* Fix for overflow issues */
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            padding: 0;
-            /* Removed padding for alignment */
-            font-family: inherit;
-            resize: vertical;
-            background: white;
-            padding: 10px;
-            /* Default for editing ease, will remove in print/adjusted below */
-        }
-
-        /* Specific style for Supplier TA to match alignment */
         .supplier textarea {
+            width: 100%;
+            min-height: 100px;
             background: transparent;
-            border: 1px solid #ccc;
-            /* Visible border for entry */
-            padding: 10px;
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            padding: 8px;
             margin-top: 0;
             font-size: 0.95rem;
             line-height: 1.6;
+            font-family: inherit;
+            resize: vertical;
+            transition: all 0.2s;
         }
 
         .supplier textarea:focus {
             outline: none;
             border-color: var(--accent-color);
             background: white;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
         }
 
-        /* Print Display Logic */
         .supplier-print-view {
             display: none;
-            /* Hide on screen */
             white-space: pre-wrap;
-            /* Preserve formatting */
             font-family: inherit;
             font-size: 0.95rem;
             line-height: 1.6;
             color: var(--text-color);
             margin-top: 4px;
-            /* Align with label */
-        }
-
-        /* Terms textarea */
-        .terms-ta {
-            padding: 10px;
-        }
-
-        .terms-container {
-            margin-top: 40px;
-            font-size: 0.9rem;
-            color: #475569;
         }
 
         /* Table Styling */
@@ -293,10 +251,11 @@
             width: 100%;
             border-collapse: separate;
             border-spacing: 0;
-            margin: 30px 0;
-            border-radius: 8px;
+            margin: 30px 0 10px 0;
+            border-radius: var(--radius-md);
             overflow: hidden;
             border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-sm);
         }
 
         th {
@@ -305,44 +264,74 @@
             font-weight: 600;
             text-transform: uppercase;
             font-size: 0.85rem;
-            padding: 12px 15px;
+            padding: 16px 15px;
+            text-align: left;
         }
 
         td {
             border-bottom: 1px solid var(--border-color);
             padding: 12px 15px;
             font-size: 0.95rem;
+            vertical-align: top;
         }
 
         tr:last-child td {
             border-bottom: none;
         }
 
-        tr:nth-child(even) {
+        tr.table-row:nth-child(even) {
             background-color: #f8fafc;
         }
 
         .row-input {
             width: 100%;
             border: 1px solid transparent;
-            padding: 5px;
+            padding: 8px;
             border-radius: 4px;
             font-family: inherit;
             background: transparent;
+            font-size: 0.95rem;
+            transition: all 0.2s;
+        }
+
+        .row-input.desc {
+            resize: vertical;
+            min-height: 40px;
+            overflow: hidden;
         }
 
         .row-input:focus {
             background: white;
             border-color: var(--accent-color);
             outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
+        }
+
+        .btn-delete {
+            background: #ef4444;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 6px 10px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: background 0.2s;
+            opacity: 0.8;
+        }
+
+        .btn-delete:hover {
+            background: #dc2626;
+            opacity: 1;
         }
 
         .summary-section {
             display: flex;
             justify-content: space-between;
             margin-top: 40px;
-            padding-top: 20px;
-            border-top: 2px solid #f1f5f9;
+            padding: 24px;
+            background: #f8fafc;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
         }
 
         .words-col {
@@ -354,9 +343,10 @@
 
         .words-col strong {
             display: block;
-            margin-bottom: 5px;
+            margin-bottom: 8px;
             color: var(--primary-color);
             font-style: normal;
+            font-weight: 600;
         }
 
         .totals-col {
@@ -368,31 +358,68 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            color: #475569;
         }
 
         .totals-row.grand-total {
-            font-size: 1.2rem;
+            font-size: 1.25rem;
             font-weight: 700;
             color: var(--primary-color);
-            border-top: 2px solid var(--primary-color);
-            padding-top: 10px;
+            border-top: 2px solid var(--border-color);
+            padding-top: 15px;
             margin-top: 15px;
         }
 
         .tax-select {
-            padding: 5px;
+            padding: 6px 10px;
             border-radius: 4px;
             border: 1px solid var(--border-color);
             font-family: inherit;
             font-size: 0.85rem;
             margin-left: 10px;
+            background: white;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .tax-select:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .terms-container {
+            margin-top: 40px;
+            font-size: 0.9rem;
+            color: #475569;
+        }
+
+        .terms-ta {
+            width: 100%;
+            min-height: 80px;
+            padding: 12px;
+            border: 1px dashed var(--border-color);
+            border-radius: 4px;
+            margin-top: 8px;
+            color: inherit;
+            font-family: inherit;
+            resize: vertical;
+            box-sizing: border-box;
+            background: transparent;
+            transition: all 0.2s;
+        }
+
+        .terms-ta:focus {
+            outline: none;
+            border-color: var(--accent-color);
+            background: white;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.1);
         }
 
         .footer {
             display: flex;
             justify-content: space-between;
-            margin-top: 80px;
+            margin-top: 60px;
             align-items: flex-end;
             page-break-inside: avoid;
         }
@@ -403,17 +430,18 @@
         }
 
         .stamp-img {
-            height: 100px;
+            height: 90px;
             object-fit: contain;
             display: block;
-            margin: 10px auto;
+            margin: 15px auto;
         }
 
         .signatory-text {
-            border-top: 1px solid #cbd5e1;
+            border-top: 2px solid var(--border-color);
             padding-top: 10px;
-            margin-top: 10px;
+            margin-top: 15px;
             font-weight: 600;
+            color: var(--primary-color);
         }
 
         /* Buttons */
@@ -427,12 +455,13 @@
         }
 
         .btn {
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
             border-radius: 50px;
             cursor: pointer;
             font-weight: 600;
-            box-shadow: var(--shadow-lg);
+            font-size: 1rem;
+            box-shadow: 0 10px 15px -3px rgba(39, 174, 96, 0.3);
             transition: all 0.2s;
             display: flex;
             align-items: center;
@@ -440,62 +469,50 @@
         }
 
         .btn-primary {
-            background: #27ae60;
+            background: #10b981;
             color: white;
         }
 
-        .btn-secondary {
-            background: var(--primary-color);
-            color: white;
-        }
-
-        .btn:hover {
+        .btn-primary:hover {
+            background: #059669;
             transform: translateY(-2px);
-            box-shadow: 0 15px 20px -5px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 20px -5px rgba(16, 185, 129, 0.4);
         }
 
         #add-row-btn-container {
-            margin-top: 10px;
+            margin-top: 12px;
             text-align: right;
         }
 
         .btn-sm {
-            padding: 8px 16px;
-            background: #e2e8f0;
-            color: var(--primary-color);
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
             border: none;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 500;
             font-size: 0.9rem;
             transition: background 0.2s;
+            box-shadow: var(--shadow-sm);
         }
 
         .btn-sm:hover {
-            background: #cbd5e1;
+            background: #1e293b;
+            transform: translateY(-1px);
         }
 
         @media print {
-            @page {
-                size: A4;
-                margin: 5mm;
-                /* Maximize printable area */
-            }
+            @page { size: A4; margin: 10mm; }
 
             body {
-                margin: 0;
-                padding: 0;
                 background: white;
                 -webkit-print-color-adjust: exact;
                 print-color-adjust: exact;
                 zoom: 85%;
-                /* Aggressive scale down to force single page (previously 90%) */
             }
 
-            .action-buttons,
-            .btn-sm,
-            #login-overlay,
-            .tax-select-container {
+            .action-buttons, .btn-sm, .btn-delete, #login-overlay, .tax-select-container {
                 display: none !important;
             }
 
@@ -504,92 +521,25 @@
                 margin: 0;
                 width: 100%;
                 min-height: auto;
-                /* Allow height to fit content */
-                padding: 5mm;
-                /* Very compact padding to save vertical space */
-                border: 3px double var(--primary-color) !important;
-                box-sizing: border-box;
+                padding: 0;
+                border: none !important;
             }
 
-            /* Aggressive Spacing Compaction for Print */
-            .header {
-                margin-bottom: 10px;
-                /* Reduced further */
-                padding-bottom: 5px;
-            }
-
-            .address-container {
-                margin-top: 10px;
-                margin-bottom: 10px;
-                gap: 20px;
-            }
-
-            .consignee,
-            .supplier {
-                padding: 8px;
-                /* Reduced padding */
-                background: none;
-                border: 1px solid #ccc;
-            }
-
-            /* HIDE TEXTAREA IN PRINT */
-            .supplier textarea {
-                display: none;
-            }
-
-            /* SHOW PRINT DIV IN PRINT */
-            .supplier-print-view {
-                display: block;
-            }
-
-            .consignee strong,
-            .supplier strong {
-                margin-bottom: 4px;
-                font-size: 1rem;
-            }
-
-            table {
-                margin: 10px 0;
-                /* Reduced margin */
-            }
-
-            th,
-            td {
-                padding: 5px 8px;
-                /* Further reduced cell padding */
-            }
-
-            .summary-section {
-                margin-top: 10px;
-                padding-top: 10px;
-            }
-
-            textarea {
-                height: auto;
-                /* Adjust to content */
-                min-height: 40px;
-            }
-
-            .terms-container {
-                margin-top: 20px;
-                /* Reduced from 40px */
-            }
-
-            .footer {
-                margin-top: 10px;
-                /* Reduced drastically from 80px/30px */
-            }
-
-            .stamp-img {
-                height: 60px;
-                /* Smaller stamp */
-            }
+            .header { margin-bottom: 20px; }
+            .address-container { margin-top: 20px; margin-bottom: 20px; gap: 20px; }
+            .consignee, .supplier { padding: 15px; background: none; border: 1px solid #ccc; }
+            .supplier textarea { display: none; }
+            .supplier-print-view { display: block; }
+            .terms-ta { border: none; background: transparent; padding: 0; min-height: auto; }
+            table { margin: 15px 0; border: 1px solid #ccc; box-shadow: none; }
+            th, td { padding: 8px 10px; }
+            .summary-section { margin-top: 20px; background: none; border: 1px solid #ccc; padding: 15px; }
+            .footer { margin-top: 40px; }
+            .row-input { border: none; padding: 0; background: transparent; }
+            .row-input:focus { box-shadow: none; border: none; }
         }
 
-        /* Utility class to hide elements during print if needed */
-        .no-print {
-            display: none !important;
-        }
+        .no-print { display: none !important; }
     </style>
 </head>
 
@@ -598,7 +548,7 @@
     <div id="login-overlay">
         <div class="login-box">
             <img src="assets/logo.png" alt="Indexnine Logo" class="login-logo">
-            <h2>Login</h2>
+            <h2>Welcome Back</h2>
             <input type="text" id="username" placeholder="Username">
             <input type="password" id="password" placeholder="Password">
             <button onclick="handleLogin()">Access Portal</button>
@@ -629,11 +579,7 @@
                 </div>
                 <div class="supplier">
                     <strong>Supplier:</strong>
-                    <!-- Input for Screen -->
-                    <textarea id="supplier-ta" placeholder="Enter Supplier Name, Address and GST..." spellcheck="false"
-                        oninput="updateSupplierPrintView()"></textarea>
-
-                    <!-- Display for Print -->
+                    <textarea id="supplier-ta" placeholder="Enter Supplier Name, Address and GST..." spellcheck="false" oninput="updateSupplierPrintView()"></textarea>
                     <div id="supplier-print-view" class="supplier-print-view"></div>
                 </div>
             </div>
@@ -642,21 +588,21 @@
                 <thead>
                     <tr>
                         <th style="width: 5%;">#</th>
-                        <th style="width: 50%;">Particulars</th>
+                        <th style="width: 45%;">Particulars</th>
                         <th style="width: 10%;">Qty</th>
                         <th style="width: 15%;">Rate (₹)</th>
-                        <th style="width: 20%;">Amount (₹)</th>
+                        <th style="width: 15%;">Amount (₹)</th>
+                        <th style="width: 10%;" class="no-print">Action</th>
                     </tr>
                 </thead>
                 <tbody id="table-body">
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" class="row-input" placeholder="Item description"></td>
-                        <td><input type="number" class="row-input qty" value="0" min="0" oninput="calculateTotal()">
-                        </td>
-                        <td><input type="number" class="row-input rate" value="0" min="0" oninput="calculateTotal()">
-                        </td>
+                    <tr class="table-row">
+                        <td class="row-index">1</td>
+                        <td><textarea class="row-input desc" placeholder="Item description" rows="1"></textarea></td>
+                        <td><input type="number" class="row-input qty" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                        <td><input type="number" class="row-input rate" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
                         <td class="amt-cell">0.00</td>
+                        <td class="no-print"><button class="btn-delete" onclick="removeRow(this)">Remove</button></td>
                     </tr>
                 </tbody>
             </table>
@@ -676,13 +622,13 @@
                         <span>₹ <span id="sub-total">0.00</span></span>
                     </div>
 
-                    <!-- Tax Section -->
                     <div class="totals-row">
                         <span class="tax-label-container">
                             Tax
                             <span class="tax-select-container">
                                 <select id="tax-type" class="tax-select" onchange="calculateTotal()">
-                                    <option value="cgst_sgst">CGST (9%) + SGST (9%)</option>
+                                    <option value="none">None (0%)</option>
+                                    <option value="cgst_sgst" selected>CGST (9%) + SGST (9%)</option>
                                     <option value="igst">IGST (18%)</option>
                                 </select>
                             </span>
@@ -690,12 +636,8 @@
                         <span></span>
                     </div>
 
-                    <!-- Dynamic Tax Rows Container -->
-                    <div id="tax-rows-container">
-                        <!-- JS will inject rows here -->
-                    </div>
+                    <div id="tax-rows-container"></div>
 
-                    <!-- Round Off Row -->
                     <div class="totals-row" id="round-off-container" style="display: none;">
                         <span>Round Off:</span>
                         <span><span id="round-off-val">0.00</span></span>
@@ -710,8 +652,7 @@
 
             <div class="terms-container">
                 <strong style="color: var(--primary-color);">Terms & Conditions:</strong><br>
-                <textarea class="terms-ta" style="height: 60px; margin-top: 5px; color: #475569;"
-                    spellcheck="false"></textarea>
+                <textarea class="terms-ta" placeholder="Enter terms and conditions here..." spellcheck="false"></textarea>
             </div>
 
             <div class="footer">
@@ -725,20 +666,34 @@
         </div>
 
         <div class="action-buttons">
-            <button class="btn btn-primary" onclick="window.print()">Download PDF</button>
+            <button class="btn btn-primary" onclick="window.print()">Download PDF / Print</button>
         </div>
     </div>
 
     <script>
-        // Sync Function
         function updateSupplierPrintView() {
             const ta = document.getElementById('supplier-ta');
             const view = document.getElementById('supplier-print-view');
-
-            // Handle if element not found just in case but safe in this static file
             if (ta && view) {
                 view.innerText = ta.value;
             }
+        }
+
+        // Auto-expand textarea
+        document.addEventListener('input', function (event) {
+            if (event.target.tagName.toLowerCase() !== 'textarea') return;
+            autoExpand(event.target);
+        }, false);
+
+        function autoExpand(field) {
+            field.style.height = 'inherit';
+            var computed = window.getComputedStyle(field);
+            var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
+                         + parseInt(computed.getPropertyValue('padding-top'), 10)
+                         + field.scrollHeight
+                         + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                         + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+            field.style.height = height + 'px';
         }
 
         function handleLogin() {
@@ -752,58 +707,78 @@
                     document.getElementById('portal-content').style.display = 'block';
                 }, 300);
 
-                // Set current date
                 const today = new Date();
                 const formattedDate = today.getDate() + '/' + today.toLocaleString('default', { month: 'short' }) + '/' + today.getFullYear().toString().substr(-2);
                 document.getElementById('date-val').innerHTML = "<strong>Date:</strong> " + formattedDate;
 
-                // Auto Generate PO Number with LocalStorage
-                // Start from PO-2026-001
                 let currentSeq = localStorage.getItem('po_seq');
-
                 if (!currentSeq) {
                     currentSeq = 1;
                 } else {
                     currentSeq = parseInt(currentSeq) + 1;
                 }
-
                 localStorage.setItem('po_seq', currentSeq);
 
-                // Pad with zeros (e.g., 001)
                 const seqStr = currentSeq.toString().padStart(3, '0');
-                const poNum = "PO-2026-" + seqStr;
-
+                const poNum = "PO-" + today.getFullYear() + "-" + seqStr;
                 document.getElementById('po-number-val').innerHTML = "<strong>PO No:</strong> " + poNum;
 
-                // Initial calc
                 calculateTotal();
-
             } else {
                 alert("Invalid Credentials");
             }
         }
 
+        function updateRowIndices() {
+            const rows = document.querySelectorAll('#table-body .table-row');
+            rows.forEach((row, index) => {
+                row.querySelector('.row-index').innerText = index + 1;
+            });
+        }
+
         function addRow() {
             const table = document.getElementById('table-body');
-            const rowCount = table.rows.length + 1;
             const row = table.insertRow(-1);
-            row.innerHTML = `<td>${rowCount}</td><td><input type="text" class="row-input"></td><td><input type="number" class="row-input qty" value="0" min="0" oninput="calculateTotal()"></td><td><input type="number" class="row-input rate" value="0" min="0" oninput="calculateTotal()"></td><td class="amt-cell">0.00</td>`;
+            row.className = "table-row";
+            row.innerHTML = `
+                <td class="row-index"></td>
+                <td><textarea class="row-input desc" placeholder="Item description" rows="1"></textarea></td>
+                <td><input type="number" class="row-input qty" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                <td><input type="number" class="row-input rate" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                <td class="amt-cell">0.00</td>
+                <td class="no-print"><button class="btn-delete" onclick="removeRow(this)">Remove</button></td>
+            `;
+            updateRowIndices();
+        }
+
+        function removeRow(btn) {
+            const table = document.getElementById('table-body');
+            if (table.rows.length <= 1) {
+                alert("You must have at least one item.");
+                return;
+            }
+            const row = btn.closest('tr');
+            row.parentNode.removeChild(row);
+            updateRowIndices();
+            calculateTotal();
         }
 
         function calculateTotal() {
             let subTotal = 0;
-            const rows = document.querySelectorAll('#table-body tr');
+            const rows = document.querySelectorAll('#table-body tr.table-row');
             rows.forEach(row => {
-                const qty = parseFloat(row.querySelector('.qty').value) || 0;
-                const rate = parseFloat(row.querySelector('.rate').value) || 0;
+                const qtyVal = row.querySelector('.qty').value;
+                const rateVal = row.querySelector('.rate').value;
+                const qty = qtyVal ? parseFloat(qtyVal) : 0;
+                const rate = rateVal ? parseFloat(rateVal) : 0;
+                
                 const amt = qty * rate;
-                row.querySelector('.amt-cell').innerText = amt.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+                row.querySelector('.amt-cell').innerText = amt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 subTotal += amt;
             });
 
-            document.getElementById('sub-total').innerText = subTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+            document.getElementById('sub-total').innerText = subTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
-            // Tax Calculation
             const taxType = document.getElementById('tax-type').value;
             const taxContainer = document.getElementById('tax-rows-container');
             let totalTaxAmt = 0;
@@ -814,42 +789,45 @@
                 taxContainer.innerHTML = `
                     <div class="totals-row">
                         <span>IGST (18%):</span>
-                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                 `;
-            } else {
+            } else if (taxType === 'cgst_sgst') {
                 const taxAmt = subTotal * 0.09;
                 totalTaxAmt = taxAmt * 2;
                 taxContainer.innerHTML = `
                     <div class="totals-row">
                         <span>CGST (9%):</span>
-                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                     <div class="totals-row">
                         <span>SGST (9%):</span>
-                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</span>
+                        <span>₹ ${taxAmt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</span>
                     </div>
                 `;
+            } else {
+                taxContainer.innerHTML = '';
             }
 
             const rawGrandTotal = subTotal + totalTaxAmt;
             const roundedTotal = Math.round(rawGrandTotal);
             const roundOffAmt = roundedTotal - rawGrandTotal;
 
-            // Round Off Display Logic
             const roundOffContainer = document.getElementById('round-off-container');
             const roundOffVal = document.getElementById('round-off-val');
 
             if (Math.abs(roundOffAmt) > 0.001) {
                 roundOffContainer.style.display = 'flex';
-                // Show sign explicitly
-                const sign = roundOffAmt > 0 ? '+' : '';
-                roundOffVal.innerText = sign + roundOffAmt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                // Only show round off if total is non-zero
+                if (roundedTotal > 0) {
+                    const sign = roundOffAmt > 0 ? '+' : '';
+                    roundOffVal.innerText = sign + roundOffAmt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                }
             } else {
                 roundOffContainer.style.display = 'none';
             }
 
-            document.getElementById('grand-total').innerText = roundedTotal.toLocaleString('en-IN', { minimumFractionDigits: 2 });
+            document.getElementById('grand-total').innerText = roundedTotal.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
             document.getElementById('amount-in-words').innerText = "Rupees " + numberToWords(roundedTotal) + " Only";
         }
@@ -859,14 +837,17 @@
             const a = ['', 'One ', 'Two ', 'Three ', 'Four ', 'Five ', 'Six ', 'Seven ', 'Eight ', 'Nine ', 'Ten ', 'Eleven ', 'Twelve ', 'Thirteen ', 'Fourteen ', 'Fifteen ', 'Sixteen ', 'Seventeen ', 'Eighteen ', 'Nineteen '];
             const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety'];
 
-            if (n < 20) return a[n];
-            if (n < 100) return b[Math.floor(n / 10)] + " " + a[n % 10];
-            if (n < 1000) return a[Math.floor(n / 100)] + "Hundred " + numberToWords(n % 100);
-            if (n < 100000) return numberToWords(Math.floor(n / 1000)) + "Thousand " + numberToWords(n % 1000);
-            if (n < 10000000) return numberToWords(Math.floor(n / 100000)) + "Lakh " + numberToWords(n % 100000);
-            return numberToWords(Math.floor(n / 10000000)) + "Crore " + numberToWords(n % 10000000);
+            function convert(num) {
+                if (num === 0) return "";
+                if (num < 20) return a[num];
+                if (num < 100) return b[Math.floor(num / 10)] + (num % 10 > 0 ? " " + a[num % 10] : "");
+                if (num < 1000) return a[Math.floor(num / 100)] + "Hundred " + convert(num % 100);
+                if (num < 100000) return convert(Math.floor(num / 1000)) + "Thousand " + convert(num % 1000);
+                if (num < 10000000) return convert(Math.floor(num / 100000)) + "Lakh " + convert(num % 100000);
+                return convert(Math.floor(num / 10000000)) + "Crore " + convert(num % 10000000);
+            }
+            return convert(n).trim();
         }
     </script>
 </body>
-
 </html>
