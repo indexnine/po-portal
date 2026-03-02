@@ -42,7 +42,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(30,41,59,0.95) 0%, rgba(15,23,42,0.98) 100%);
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(15, 23, 42, 0.98) 100%);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
@@ -59,12 +59,19 @@
             width: 100%;
             max-width: 400px;
             animation: slideUp 0.5s ease-out;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .login-logo {
@@ -147,7 +154,8 @@
             padding-bottom: 15px;
         }
 
-        .header-left, .header-right {
+        .header-left,
+        .header-right {
             flex: 1;
         }
 
@@ -195,7 +203,8 @@
             margin-bottom: 40px;
         }
 
-        .consignee, .supplier {
+        .consignee,
+        .supplier {
             flex: 1;
             font-size: 0.95rem;
             line-height: 1.6;
@@ -205,7 +214,8 @@
             border: 1px solid var(--border-color);
         }
 
-        .consignee strong, .supplier strong {
+        .consignee strong,
+        .supplier strong {
             display: block;
             margin-bottom: 12px;
             color: var(--primary-color);
@@ -503,7 +513,10 @@
         }
 
         @media print {
-            @page { size: A4; margin: 10mm; }
+            @page {
+                size: A4;
+                margin: 10mm;
+            }
 
             body {
                 background: white;
@@ -512,7 +525,11 @@
                 zoom: 85%;
             }
 
-            .action-buttons, .btn-sm, .btn-delete, #login-overlay, .tax-select-container {
+            .action-buttons,
+            .btn-sm,
+            .btn-delete,
+            #login-overlay,
+            .tax-select-container {
                 display: none !important;
             }
 
@@ -525,21 +542,75 @@
                 border: none !important;
             }
 
-            .header { margin-bottom: 20px; }
-            .address-container { margin-top: 20px; margin-bottom: 20px; gap: 20px; }
-            .consignee, .supplier { padding: 15px; background: none; border: 1px solid #ccc; }
-            .supplier textarea { display: none; }
-            .supplier-print-view { display: block; }
-            .terms-ta { border: none; background: transparent; padding: 0; min-height: auto; }
-            table { margin: 15px 0; border: 1px solid #ccc; box-shadow: none; }
-            th, td { padding: 8px 10px; }
-            .summary-section { margin-top: 20px; background: none; border: 1px solid #ccc; padding: 15px; }
-            .footer { margin-top: 40px; }
-            .row-input { border: none; padding: 0; background: transparent; }
-            .row-input:focus { box-shadow: none; border: none; }
+            .header {
+                margin-bottom: 20px;
+            }
+
+            .address-container {
+                margin-top: 20px;
+                margin-bottom: 20px;
+                gap: 20px;
+            }
+
+            .consignee,
+            .supplier {
+                padding: 15px;
+                background: none;
+                border: 1px solid #ccc;
+            }
+
+            .supplier textarea {
+                display: none;
+            }
+
+            .supplier-print-view {
+                display: block;
+            }
+
+            .terms-ta {
+                border: none;
+                background: transparent;
+                padding: 0;
+                min-height: auto;
+            }
+
+            table {
+                margin: 15px 0;
+                border: 1px solid #ccc;
+                box-shadow: none;
+            }
+
+            th,
+            td {
+                padding: 8px 10px;
+            }
+
+            .summary-section {
+                margin-top: 20px;
+                background: none;
+                border: 1px solid #ccc;
+                padding: 15px;
+            }
+
+            .footer {
+                margin-top: 40px;
+            }
+
+            .row-input {
+                border: none;
+                padding: 0;
+                background: transparent;
+            }
+
+            .row-input:focus {
+                box-shadow: none;
+                border: none;
+            }
         }
 
-        .no-print { display: none !important; }
+        .no-print {
+            display: none !important;
+        }
     </style>
 </head>
 
@@ -576,10 +647,12 @@
                     Indexnine Technologies Pvt. Ltd.<br>
                     12th Floor, Sadanand Business Center<br>
                     Pashan Highway Side Rd, Pune-411007
+                    GST: 27AADCI7588M1ZR
                 </div>
                 <div class="supplier">
                     <strong>Supplier:</strong>
-                    <textarea id="supplier-ta" placeholder="Enter Supplier Name, Address and GST..." spellcheck="false" oninput="updateSupplierPrintView()"></textarea>
+                    <textarea id="supplier-ta" placeholder="Enter Supplier Name, Address and GST..." spellcheck="false"
+                        oninput="updateSupplierPrintView()"></textarea>
                     <div id="supplier-print-view" class="supplier-print-view"></div>
                 </div>
             </div>
@@ -599,8 +672,10 @@
                     <tr class="table-row">
                         <td class="row-index">1</td>
                         <td><textarea class="row-input desc" placeholder="Item description" rows="1"></textarea></td>
-                        <td><input type="number" class="row-input qty" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
-                        <td><input type="number" class="row-input rate" value="" placeholder="0" min="0" oninput="calculateTotal()"></td>
+                        <td><input type="number" class="row-input qty" value="" placeholder="0" min="0"
+                                oninput="calculateTotal()"></td>
+                        <td><input type="number" class="row-input rate" value="" placeholder="0" min="0"
+                                oninput="calculateTotal()"></td>
                         <td class="amt-cell">0.00</td>
                         <td class="no-print"><button class="btn-delete" onclick="removeRow(this)">Remove</button></td>
                     </tr>
@@ -652,7 +727,8 @@
 
             <div class="terms-container">
                 <strong style="color: var(--primary-color);">Terms & Conditions:</strong><br>
-                <textarea class="terms-ta" placeholder="Enter terms and conditions here..." spellcheck="false"></textarea>
+                <textarea class="terms-ta" placeholder="Enter terms and conditions here..."
+                    spellcheck="false"></textarea>
             </div>
 
             <div class="footer">
@@ -689,10 +765,10 @@
             field.style.height = 'inherit';
             var computed = window.getComputedStyle(field);
             var height = parseInt(computed.getPropertyValue('border-top-width'), 10)
-                         + parseInt(computed.getPropertyValue('padding-top'), 10)
-                         + field.scrollHeight
-                         + parseInt(computed.getPropertyValue('padding-bottom'), 10)
-                         + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
+                + parseInt(computed.getPropertyValue('padding-top'), 10)
+                + field.scrollHeight
+                + parseInt(computed.getPropertyValue('padding-bottom'), 10)
+                + parseInt(computed.getPropertyValue('border-bottom-width'), 10);
             field.style.height = height + 'px';
         }
 
@@ -771,7 +847,7 @@
                 const rateVal = row.querySelector('.rate').value;
                 const qty = qtyVal ? parseFloat(qtyVal) : 0;
                 const rate = rateVal ? parseFloat(rateVal) : 0;
-                
+
                 const amt = qty * rate;
                 row.querySelector('.amt-cell').innerText = amt.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
                 subTotal += amt;
@@ -850,4 +926,5 @@
         }
     </script>
 </body>
+
 </html>
